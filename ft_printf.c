@@ -6,7 +6,7 @@
 /*   By: dpenas-u <dpenas-u@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:22:47 by dpenas-u          #+#    #+#             */
-/*   Updated: 2022/04/06 12:47:36 by dpenas-u         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:12:41 by dpenas-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_printf(char const *str, ...)
 {
 
 	va_list	argptr;
-	va_list	copy;
 	//char	*s = 0;
 	va_start(argptr, str);
 	long int	i;
@@ -26,21 +25,19 @@ int	ft_printf(char const *str, ...)
 	float	f;
 	void	*v;
 
+	/*
 	i = 1;
-	printf("\n%lu\n");
 	c = 'a';
 	printf("\n%lu\n", sizeof(c));
 	s = "HOLA";
 	printf("\n%lu\n", sizeof(s));
 	f = -1.2;
 	printf("\n%lu\n", sizeof(f));
-	v = s;
 	printf("\n%lu\n", sizeof(v));
-	va_copy(argptr, copy);
-	s = va_arg(argptr, char *);
-	printf("\n%s\n", s);
+	*/
+	v = va_arg(argptr, void *);
+	printf("\n%s\n", v);
 	//s = va_arg(copy, char *);
-	printf("\n%s\n", s);
 /*
 	while ((s = va_arg(argptr, char *)))
 	{
@@ -78,5 +75,5 @@ int	main(void)
 	s = "Hola";
 	s1 = "HWY";
 	i = 58;
-	ft_printf(s1, s, s1);
+	ft_printf(s1, s1, s);
 }
