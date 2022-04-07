@@ -6,7 +6,7 @@
 /*   By: dpenas-u <dpenas-u@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:22:47 by dpenas-u          #+#    #+#             */
-/*   Updated: 2022/04/07 13:57:42 by dpenas-u         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:11:38 by dpenas-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,49 +16,51 @@
 int	ft_printf(char const *str, ...)
 {
 	va_list	argptr;
-	int		i;
+	int		n_char;
 
 	va_start(argptr, str);
-	i = -1;
-	while (str[++i])
+	n_char = 0;
+	while (*str)
 	{
-		if (str[i] == '%' && str[i + 1] == 'c')
+		if (*str == '%' && *(str + 1) == 'c')
 		{
-			ft_putchar(va_arg(argptr, int));
-			i = i + 1;
+			n_char += ft_putchar(va_arg(argptr, int));
+			str++;
 		}
-		else if (str[i] == '%' && str[i + 1] == 's')
+		else if (*str == '%' && *(str + 1) == 's')
 		{
-			ft_putstr(va_arg(argptr, char *));
-			i = i + 1;
+			ft_putstr(va_arg(argptr, char *), &n_char);
+			str++;
 		}
-		else if (str[i] == '%' && (str[i + 1] == 'd' || str[i + 1] == 'i'))
+		else if (*str == '%' && (*(str + 1) == 'd' || *(str + 1) == 'i'))
 		{
-			ft_putnbr(va_arg(argptr, int));
-			i = i + 1;
+			ft_putnbr(va_arg(argptr, int), &n_char);
+			str++;
 		}
-		else if (str[i] == '%' && str[i + 1] == 'u')
+		else if (*str == '%' && *(str + 1) == 'u')
 		{
-			ft_putunbr(va_arg(argptr, int));
-			i = i + 1;
+			ft_putunbr(va_arg(argptr, int), &n_char);
+			str++;
 		}
-		else if (str[i] == 37 && str[i + 1] == 'x')
+		else if (*str == 37 && *(str + 1) == 'x')
 		{
-			ft_putnbr_base(va_arg(argptr, int), "0123456789abcdef");
-			i = i + 1;
+			ft_putxnbr(va_arg(argptr, int), "0123456789abcdef", &n_char);
+			str++;
 		}
-		else if (str[i] == '%' && str[i + 1] == 'X')
+		else if (*str == '%' && *(str + 1) == 'X')
 		{
-			ft_putnbr_base(va_arg(argptr, int), "0123456789ABCDEF");
-			i = i + 1;
+			ft_putxnbr(va_arg(argptr, int), "0123456789ABCDEF", &n_char);
+			str++;
 		}
-		else if (str[i] == 37 && str[i + 1] == '%')
+		else if (*str == 37 && *(str + 1) == '%')
 		{
-			ft_putchar(37);
-			i = i + 1;
+			n_char += ft_putchar(37);
+			str++;
 		}
 		else
-			ft_putchar(str[i]);
+			n_char += ft_putchar(*str);
+		str++;
 	}
-	return (i);
+	va_end(argptr);
+	return (n_char);
 }

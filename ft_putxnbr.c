@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_putxnbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpenas-u <dpenas-u@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 12:19:19 by dpenas-u          #+#    #+#             */
-/*   Updated: 2022/04/07 14:51:25 by dpenas-u         ###   ########.fr       */
+/*   Created: 2022/04/07 15:56:23 by dpenas-u          #+#    #+#             */
+/*   Updated: 2022/04/07 16:11:31 by dpenas-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+void	ft_putxnbr(int nbr, char *base, int *n_char)
 {
-	write(1, &c, 1);
-	return (1);
+	unsigned int	n;
+
+	n = 0;
+	if (nbr > -1)
+	{
+		ft_putnbr_base(nbr, base, n_char);
+		return ;
+	}
+	n = 4294967296 + nbr;
+	if (n / 16)
+		ft_putnbr_base(n / 16, base, n_char);
+	ft_putnbr_base(n % 16, base, n_char);
 }
