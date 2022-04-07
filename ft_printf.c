@@ -6,7 +6,7 @@
 /*   By: dpenas-u <dpenas-u@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:22:47 by dpenas-u          #+#    #+#             */
-/*   Updated: 2022/04/06 13:12:41 by dpenas-u         ###   ########.fr       */
+/*   Updated: 2022/04/07 13:57:42 by dpenas-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,65 +15,50 @@
 
 int	ft_printf(char const *str, ...)
 {
-
 	va_list	argptr;
-	//char	*s = 0;
+	int		i;
+
 	va_start(argptr, str);
-	long int	i;
-	char	c;
-	char	*s;
-	float	f;
-	void	*v;
-
-	/*
-	i = 1;
-	c = 'a';
-	printf("\n%lu\n", sizeof(c));
-	s = "HOLA";
-	printf("\n%lu\n", sizeof(s));
-	f = -1.2;
-	printf("\n%lu\n", sizeof(f));
-	printf("\n%lu\n", sizeof(v));
-	*/
-	v = va_arg(argptr, void *);
-	printf("\n%s\n", v);
-	//s = va_arg(copy, char *);
-/*
-	while ((s = va_arg(argptr, char *)))
+	i = -1;
+	while (str[++i])
 	{
-		printf("\n%s\n", s);
+		if (str[i] == '%' && str[i + 1] == 'c')
+		{
+			ft_putchar(va_arg(argptr, int));
+			i = i + 1;
+		}
+		else if (str[i] == '%' && str[i + 1] == 's')
+		{
+			ft_putstr(va_arg(argptr, char *));
+			i = i + 1;
+		}
+		else if (str[i] == '%' && (str[i + 1] == 'd' || str[i + 1] == 'i'))
+		{
+			ft_putnbr(va_arg(argptr, int));
+			i = i + 1;
+		}
+		else if (str[i] == '%' && str[i + 1] == 'u')
+		{
+			ft_putunbr(va_arg(argptr, int));
+			i = i + 1;
+		}
+		else if (str[i] == 37 && str[i + 1] == 'x')
+		{
+			ft_putnbr_base(va_arg(argptr, int), "0123456789abcdef");
+			i = i + 1;
+		}
+		else if (str[i] == '%' && str[i + 1] == 'X')
+		{
+			ft_putnbr_base(va_arg(argptr, int), "0123456789ABCDEF");
+			i = i + 1;
+		}
+		else if (str[i] == 37 && str[i + 1] == '%')
+		{
+			ft_putchar(37);
+			i = i + 1;
+		}
+		else
+			ft_putchar(str[i]);
 	}
-*/
-	//va_copy(argptr, copy);
-	/*
-	if (va_arg(argptr, int))
-	{
-		printf("\nAQUI\n");
-		//s = va_arg(copy, char *);
-		//printf("\n%s\n", s);
-	}
-	*/
-	/*
-	else if (va_arg(argptr, int))
-	{
-		int	i = va_arg(argptr, int);
-		printf("\n%i\n", i);
-		return (1);
-	}
-	*/
-	//va_end(argptr);
-	//va_end(copy);
-	return (1);
-}
-
-int	main(void)
-{
-	char	*s;
-	char	*s1;
-	int	i;
-
-	s = "Hola";
-	s1 = "HWY";
-	i = 58;
-	ft_printf(s1, s1, s);
+	return (i);
 }

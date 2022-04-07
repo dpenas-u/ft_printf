@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putunbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpenas-u <dpenas-u@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 10:12:23 by dpenas-u          #+#    #+#             */
-/*   Updated: 2022/04/07 12:32:45 by dpenas-u         ###   ########.fr       */
+/*   Created: 2022/04/07 12:25:58 by dpenas-u          #+#    #+#             */
+/*   Updated: 2022/04/07 12:34:16 by dpenas-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-#define LIBFT_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <stdlib.h>
-# include <unistd.h>
+void	ft_putunbr(int nbr)
+{
+	unsigned int	n;
 
-int		ft_printf(const char *str, ...);
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
-void	ft_putnbr(int i);
-void	ft_putnbr_base(int nbr, char *base);
-size_t	ft_strlen(const char *s);
-void	ft_putunbr(int nbr);
-
-#endif
+	n = 0;
+	if (n > -1)
+		ft_putnbr(nbr);
+	n = 4294967296 + nbr;
+	if (n / 10)
+		ft_putnbr(n / 10);
+	ft_putchar(n % 10 + 48);
+}
