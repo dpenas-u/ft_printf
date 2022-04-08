@@ -6,7 +6,7 @@
 /*   By: dpenas-u <dpenas-u@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:22:47 by dpenas-u          #+#    #+#             */
-/*   Updated: 2022/04/07 16:11:38 by dpenas-u         ###   ########.fr       */
+/*   Updated: 2022/04/08 07:31:13 by dpenas-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,22 @@ int	ft_printf(char const *str, ...)
 		}
 		else if (*str == '%' && (*(str + 1) == 'd' || *(str + 1) == 'i'))
 		{
-			ft_putnbr(va_arg(argptr, int), &n_char);
+			ft_putnbr_base(va_arg(argptr, int), "0123456789", &n_char);
 			str++;
 		}
 		else if (*str == '%' && *(str + 1) == 'u')
 		{
-			ft_putunbr(va_arg(argptr, int), &n_char);
+			ft_putunbr(va_arg(argptr, int), "0123456789", 10, &n_char);
 			str++;
 		}
 		else if (*str == 37 && *(str + 1) == 'x')
 		{
-			ft_putxnbr(va_arg(argptr, int), "0123456789abcdef", &n_char);
+			ft_putunbr(va_arg(argptr, int), "0123456789abcdef", 16, &n_char);
 			str++;
 		}
 		else if (*str == '%' && *(str + 1) == 'X')
 		{
-			ft_putxnbr(va_arg(argptr, int), "0123456789ABCDEF", &n_char);
+			ft_putunbr(va_arg(argptr, int), "0123456789ABCDEF", 16, &n_char);
 			str++;
 		}
 		else if (*str == 37 && *(str + 1) == '%')
