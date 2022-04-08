@@ -6,7 +6,7 @@
 /*   By: dpenas-u <dpenas-u@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:22:47 by dpenas-u          #+#    #+#             */
-/*   Updated: 2022/04/08 07:31:13 by dpenas-u         ###   ########.fr       */
+/*   Updated: 2022/04/08 08:14:21 by dpenas-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ int	ft_printf(char const *str, ...)
 		else if (*str == '%' && *(str + 1) == 's')
 		{
 			ft_putstr(va_arg(argptr, char *), &n_char);
+			str++;
+		}
+		else if (*str == '%' && *(str + 1) == 'p')
+		{
+			ft_putstr("0x", &n_char);
+			ft_putpnbr_base(va_arg(argptr, long int), "0123456789abcdef", &n_char);
 			str++;
 		}
 		else if (*str == '%' && (*(str + 1) == 'd' || *(str + 1) == 'i'))
